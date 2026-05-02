@@ -1,0 +1,326 @@
+/*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
+@import "tailwindcss";
+
+
+.win95-button {
+  outline: 1px solid;
+  outline-color: #dfdfdf gray gray #dfdfdf;
+  cursor: pointer;
+  background: silver;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+  padding: 4px 12px;
+  font-family: MS Sans Serif, sans-serif;
+  font-size: 11px;
+  position: relative;
+}
+
+.win95-button:active {
+  outline-color: gray #dfdfdf #dfdfdf gray;
+  border-color: #000 #fff #fff #000;
+  padding: 5px 11px 3px 13px;
+}
+
+.win95-button:disabled {
+  color: gray;
+  text-shadow: 1px 1px #fff;
+  cursor: default;
+}
+
+.win95-window {
+  outline: 1px solid;
+  outline-color: #fff gray gray #fff;
+  background: silver;
+  border: 2px solid #000;
+  border-color: #dfdfdf #000 #000 #dfdfdf;
+  box-shadow: 2px 2px 8px #0000004d;
+}
+
+.win95-title-bar {
+  cursor: move;
+  -webkit-user-select: none;
+  user-select: none;
+  align-items: center;
+  height: 18px;
+  padding: 2px;
+  display: flex;
+}
+
+.win95-title-bar.active {
+  color: #fff;
+  background: linear-gradient(to right, navy, #1084d0);
+}
+
+.win95-title-bar.inactive {
+  color: silver;
+  background: linear-gradient(to right, gray, #a0a0a0);
+}
+
+.win95-scroll::-webkit-scrollbar {
+  background: silver;
+  width: 16px;
+  height: 16px;
+}
+
+.win95-scroll::-webkit-scrollbar-track {
+  background: #fff;
+  border: 1px solid gray;
+}
+
+.win95-scroll::-webkit-scrollbar-thumb {
+  background: silver;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+}
+
+.win95-scroll::-webkit-scrollbar-button {
+  background: silver;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+}
+
+::selection {
+  color: #fff;
+  background: navy;
+}
+
+.context-menu {
+  outline: 1px solid;
+  outline-color: #dfdfdf gray gray #dfdfdf;
+  background: silver;
+  border: 2px solid #000;
+  border-color: #fff #000 #000 #fff;
+  box-shadow: 2px 2px 4px #0000004d;
+}
+
+.context-menu-item {
+  cursor: pointer;
+  align-items: center;
+  padding: 4px 24px;
+  font-size: 11px;
+  display: flex;
+  position: relative;
+}
+
+.context-menu-item:hover:not(.disabled) {
+  color: #fff;
+  background: navy;
+}
+
+.context-menu-item.disabled {
+  color: gray;
+  cursor: default;
+}
+
+.context-menu-separator {
+  background: gray;
+  border-top: 1px solid #fff;
+  height: 1px;
+  margin: 2px 0;
+}
+
+.win95-input {
+  outline: 1px solid;
+  outline-color: #000 #dfdfdf #dfdfdf #000;
+  background: #fff;
+  border: 2px solid #fff;
+  border-color: gray #fff #fff gray;
+  padding: 4px;
+  font-family: MS Sans Serif, sans-serif;
+  font-size: 11px;
+}
+
+.desktop-icon-label {
+  color: #fff;
+  text-shadow: 1px 1px 2px #000c;
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 11px;
+}
+
+.desktop-icon-label.selected {
+  color: #fff;
+  background: navy;
+}
+
+img, canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-text {
+  cursor: text;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.cursor-resize-nw {
+  cursor: nw-resize;
+}
+
+.cursor-resize-ne {
+  cursor: ne-resize;
+}
+
+.cursor-resize-sw {
+  cursor: sw-resize;
+}
+
+.cursor-resize-se {
+  cursor: se-resize;
+}
+
+.cursor-resize-n {
+  cursor: n-resize;
+}
+
+.cursor-resize-s {
+  cursor: s-resize;
+}
+
+.cursor-resize-w {
+  cursor: w-resize;
+}
+
+.cursor-resize-e {
+  cursor: e-resize;
+}
+
+.cursor-wait {
+  cursor: wait;
+}
+
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateX(0);
+}
+
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateY(0);
+}
+
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateZ(0);
+}
+
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewX(0);
+}
+
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewY(0);
+}
+
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+
+@property --tw-leading {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-duration {
+  syntax: "*";
+  inherits: false
+}
