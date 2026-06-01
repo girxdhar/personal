@@ -223,7 +223,7 @@ export default function PhotographySection() {
               animate={{ scale: 1 }}
               transition={{ duration: 0.6 }}
               onClick={(e) => e.stopPropagation()}
-            >
+            > 
               <ImageWithFallback
                 src={selectedPhoto.url}
                 alt={selectedPhoto.title}
