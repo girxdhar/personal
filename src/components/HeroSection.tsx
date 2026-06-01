@@ -119,6 +119,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.4 }}
                 transition={{ delay: 2.2, duration: 0.5 }}
+                style={{ color: 'rgba(120, 255, 150, 0.85)', fontSize: 'clamp(0.4rem, 1.5vw, 0.65rem)' }}
               >
                 {typedText}
                 <motion.span
