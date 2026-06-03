@@ -67,10 +67,8 @@ export default function App() {
       
       <HeroSection scrollToNext={() => scrollToSection(1)} />
       
-      <div className="w-full h-auto snap-start bg-black flex flex-col items-center justify-center lg:p-8 relative z-10 border-t border-white/5">
-        <div className="w-full h-full flex flex-col">
-          <Terminal onSwitchView={() => {}} />
-        </div>
+      <div className="w-full h-auto bg-black relative z-10 border-t border-white/5">
+        <Terminal onSwitchView={() => {}} />
       </div>
       
       <AboutSection />
