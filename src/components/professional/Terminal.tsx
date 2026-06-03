@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import IDCard from "./IDCard";
-import { portfolioData } from "../components/data/portFolioData";
+import { portfolioData } from "../../data/portfolioData";
 import { Code2 } from "lucide-react";
 
 export default function Terminal({ onSwitchView }) {
@@ -116,7 +116,7 @@ const bootLines = [
 
   return (
     <div
-      className="max-w-7xl mx-auto w-full h-full flex flex-col lg:rounded-lg overflow-hidden lg:border border-[#1d1d1d] relative"
+      className="max-w-7xl mx-auto w-full h-auto lg:h-[90vh] lg:max-h-[800px] flex flex-col lg:rounded-lg overflow-hidden lg:border border-[#1d1d1d] relative"
       style={{ background: "#000", fontFamily: "'VT323','Courier New','monospace'" }}
     >
       <button
@@ -129,7 +129,7 @@ const bootLines = [
         </div>
       </button>
 
-      <div className="bg-[#0b0f14] px-4 py-2 flex items-center justify-between border-b border-[#252525] shrink-0">
+      <div className="bg-[#0b0f14] px-4 py-2 flex items-center justify-between border-b border-[#252525]">
         <div className="flex items-center gap-3">
           <div className="flex gap-2">
             <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
@@ -150,15 +150,19 @@ const bootLines = [
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
-        <div className="lg:col-span-1 bg-black border-b lg:border-b-0 lg:border-r border-[#252525] py-8 lg:py-0 flex flex-col justify-center relative">
-          <div className="w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 flex-1 min-h-0">
+        <div className="lg:col-span-1 bg-black border-b lg:border-b-0 lg:border-r border-[#252525] h-[100dvh] lg:h-auto lg:min-h-0 flex flex-col justify-center relative snap-start">
+          <div className="lg:sticky lg:top-6 w-full">
             <IDCard />
+          </div>
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:hidden text-[#8b949e] text-xs animate-bounce flex flex-col items-center">
+            <span>Scroll for Terminal</span>
+            <span className="mt-1">↓</span>
           </div>
         </div>
 
-        <div className="lg:col-span-2 bg-[#050608] flex flex-col min-h-[500px] lg:min-h-0 h-full">
-          <div className="px-6 py-3 border-b border-[#252525] bg-[#0b0f14] text-xs flex items-center gap-2 flex-wrap sm:text-xs shrink-0">
+        <div className="lg:col-span-2 bg-[#050608] h-[100dvh] lg:h-auto lg:min-h-0 flex flex-col snap-start">
+          <div className="px-4 lg:px-6 py-3 border-b border-[#252525] bg-[#0b0f14] text-[11px] sm:text-xs flex items-center gap-2 flex-wrap shrink-0">
             <span className="text-white">giri</span>
             <span className="text-[#6b7280]">@</span>
             <span className="text-[#58a6ff]">terminal</span>
@@ -179,7 +183,7 @@ const bootLines = [
 
           <div
             ref={termRef}
-            className="p-4 flex-1 overflow-y-auto min-h-0"
+            className="p-3 lg:p-4 flex-1 min-h-0 overflow-y-auto"
             onClick={() => inputRef.current?.focus()}
           >
             {booting ? (
@@ -224,7 +228,7 @@ const bootLines = [
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handleEnter}
-                      className="flex-1 bg-transparent text-[#e5e7eb] outline-none text-sm sm:text-xs ml-2"
+                      className="flex-1 bg-transparent text-[#e5e7eb] outline-none text-[11px] sm:text-xs ml-2"
                       spellCheck={false}
                     />
                     <span className="text-[#004611]">{cursorVisible ? "█" : " "}</span>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import profileImage from "../assets/profilepic.png";
+import profileImage from "./profilepic.png";
 
 export default function NeonIDCard() {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -90,11 +90,13 @@ export default function NeonIDCard() {
   const threadLength = 100 + Math.sqrt(threadDx * threadDx + threadDy * threadDy) * 0.15;
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full py-4 min-h-[350px] lg:min-h-0">
-      <div className="scale-[0.75] sm:scale-[0.85] lg:scale-100 origin-top flex flex-col items-center">
-        {/* WRAPPER: Thread + Connector + Card */}
-        <div
-          onMouseDown={handleMouseDown}
+    <div
+      className="min-h-screen flex flex-col items-center justify-start px-6"
+      style={{ background: "linear-gradient(180deg, #111, #333, #111)" }}
+    >
+      {/* WRAPPER: Thread + Connector + Card */}
+      <div
+        onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
         className="relative flex flex-col items-center cursor-grab active:cursor-grabbing"
         style={{
@@ -190,6 +192,5 @@ export default function NeonIDCard() {
         </div>
       </div>
     </div>
-  </div>
   );
 }

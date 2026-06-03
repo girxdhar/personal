@@ -3,7 +3,7 @@ import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import PhotographySection from './components/PhotographySection';
 import Navigation from './components/Navigation';
-import Terminal from './components/Terminal';
+import Terminal from './components/professional/Terminal';
 
 // Lazy load the Poetry Desktop to avoid loading all its dependencies upfront
 const PoetryDesktopSection = lazy(() => import('./components/win95Desktop/PoetryDesktopSection'));
@@ -67,8 +67,8 @@ export default function App() {
       
       <HeroSection scrollToNext={() => scrollToSection(1)} />
       
-      <div className="w-full h-screen snap-start bg-black flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 relative z-10 border-t border-white/5">
-        <div className="w-full h-full max-h-[800px] flex flex-col overflow-hidden">
+      <div className="w-full h-auto snap-start bg-black flex flex-col items-center justify-center lg:p-8 relative z-10 border-t border-white/5">
+        <div className="w-full h-full flex flex-col">
           <Terminal onSwitchView={() => {}} />
         </div>
       </div>
