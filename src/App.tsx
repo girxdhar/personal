@@ -9,15 +9,13 @@ const PoetryDesktopSection = lazy(() => import('./components/win95Desktop/Poetry
 
 export default function App() {
   const [currentSection, setCurrentSection] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [shouldLoadPoetry, setShouldLoadPoetry] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const totalSections = 4;
 
   const scrollToSection = (index: number) => {
-    if (isScrolling || index < 0 || index >= totalSections) return;
+    if (index < 0 || index >= totalSections) return;
     
-    setIsScrolling(true);
     const container = scrollContainerRef.current;
     
     if (container) {
@@ -25,17 +23,6 @@ export default function App() {
         top: index * window.innerHeight,
         behavior: 'smooth'
       });
-      
-      setCurrentSection(index);
-      
-      // Only trigger poetry desktop loading when we reach section 3
-      if (index === 3) {
-        setShouldLoadPoetry(true);
-      }
-      
-      setTimeout(() => {
-        setIsScrolling(false);
-      }, 1500);
     }
   };
 
@@ -43,29 +30,28 @@ export default function App() {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    let scrollTimeout: NodeJS.Timeout;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      if (isScrolling) return;
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (e.deltaY > 0) {
-          scrollToSection(currentSection + 1);
-        } else {
-          scrollToSection(currentSection - 1);
+    const handleScroll = () => {
+      const scrollPosition = container.scrollTop;
+      const windowHeight = window.innerHeight;
+      const section = Math.round(scrollPosition / windowHeight);
+      
+      if (section !== currentSection) {
+        setCurrentSection(section);
+        if (section >= 3) {
+          setShouldLoadPoetry(true);
         }
-      }, 50);
+      }
     };
 
-    container.addEventListener('wheel', handleWheel, { passive: false });
+    // Trigger once to setup initial state
+    handleScroll();
+
+    container.addEventListener('scroll', handleScroll);
 
     return () => {
-      container.removeEventListener('wheel', handleWheel);
-      clearTimeout(scrollTimeout);
+      container.removeEventListener('scroll', handleScroll);
     };
-  }, [currentSection, isScrolling]);
+  }, [currentSection]);
 
   const renderSection = (index: number, SectionComponent: React.ComponentType<any>, props = {}) => {
     // Render section if we're close to it (for smooth scrolling)
