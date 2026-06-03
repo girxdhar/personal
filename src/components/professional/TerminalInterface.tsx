@@ -97,67 +97,57 @@ export default function TerminalInterface({ locked, setLocked }) {
 
   return (
     <div className="w-full h-full flex flex-col bg-[#050608] text-[#d1e6d1] font-mono overflow-hidden">
-      {/* Quick Actions Header */}
-      <div className="flex-none px-4 py-3 border-b border-[#252525] bg-[#0b0f14] text-[11px] sm:text-xs flex items-center gap-2 flex-wrap min-h-[48px]">
-        <span className="text-white">giri</span>
-        <span className="text-[#6b7280]">@</span>
-        <span className="text-[#58a6ff]">terminal</span>
-        <span className="text-[#6b7280]">:~$</span>
-        <span className="text-[#d1e6d1]">ls quick_actions/</span>
-        
-        <div className="flex gap-2 ml-2 flex-wrap">
-          {["about", "experience", "skills", "projects", "clear"].map((s) => (
-            <button
-              key={s}
-              disabled={locked}
-              onClick={() => runCommand(s)}
-              className="text-[#58a6ff] hover:text-white hover:bg-[#58a6ff]/20 px-2 py-0.5 rounded transition-colors disabled:opacity-40"
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Terminal Output Area */}
       <div
         ref={termRef}
-        className="flex-1 p-4 overflow-y-auto scroll-smooth"
+        className="flex-1 p-6 overflow-y-auto scroll-smooth"
         onClick={() => inputRef.current?.focus()}
       >
         {booting ? (
-          <div className="text-[#2BC20E] text-sm sm:text-xs space-y-1">
+          <div className="text-[#2BC20E] text-sm space-y-1">
             {bootLines.map((l, i) => (
               <div key={i} className="animate-pulse">{l}</div>
             ))}
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
+            {/* Quick Actions Header inline block */}
+            <div className="text-sm flex items-center gap-2 flex-wrap">
+              <span className="text-white">giri</span>
+              <span className="text-[#58a6ff]">@ terminal :~$</span>
+              <span className="text-[#d1e6d1] mr-2">ls quick_actions/</span>
+              
+              <div className="flex gap-4 flex-wrap">
+                {["about", "experience", "skills", "projects", "clear"].map((s) => (
+                  <button
+                    key={s}
+                    disabled={locked}
+                    onClick={() => runCommand(s)}
+                    className="text-[#58a6ff] hover:text-white transition-colors disabled:opacity-40"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {commandHistory.map((item, i) => (
-              <div key={i} className="space-y-1">
-                <div className="flex items-center gap-2 text-sm sm:text-xs flex-wrap">
-                  <div className="flex items-center gap-1">
-                    <span className="text-white font-bold">giri</span>
-                    <span className="text-[#6b7280]">@</span>
-                    <span className="text-[#58a6ff] font-bold">terminal</span>
-                  </div>
-                  <span className="text-[#6b7280]">:~$</span>
+              <div key={i} className="space-y-2">
+                <div className="flex items-center gap-2 text-sm flex-wrap">
+                  <span className="text-white">giri</span>
+                  <span className="text-[#58a6ff]">@ terminal :~$</span>
                   <span className="text-white">{item.command}</span>
                 </div>
-                <div className="text-[#d1e6d1] whitespace-pre-wrap text-sm sm:text-xs leading-relaxed pl-2 border-l-2 border-[#252525]">
+                <div className="text-[#d1e6d1] whitespace-pre-wrap text-sm leading-relaxed pl-4">
                   {item.output}
                 </div>
               </div>
             ))}
 
             {!locked && (
-              <div className="flex items-center gap-2 text-sm sm:text-xs flex-wrap mt-4">
-                <div className="flex items-center gap-1">
-                  <span className="text-white font-bold">giri</span>
-                  <span className="text-[#6b7280]">@</span>
-                  <span className="text-[#01b012] font-bold">terminal</span>
-                </div>
-                <span className="text-[#6b7280]">:~$</span>
+              <div className="flex items-center gap-2 text-sm flex-wrap">
+                <span className="text-white">giri</span>
+                <span className="text-[#01b012]">@ terminal :~$</span>
                 <div className="flex-1 flex items-center relative min-w-[150px]">
                   <input
                     ref={inputRef}

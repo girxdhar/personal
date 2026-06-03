@@ -51,16 +51,23 @@ export default function Terminal({ onSwitchView }) {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 flex-1 min-h-0 overflow-y-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
           {/* ID Card Column */}
-          <div className="lg:col-span-1 bg-[#0a0a0a] border-b lg:border-b-0 lg:border-r border-[#252525] h-[100dvh] lg:h-auto flex flex-col justify-center relative snap-start">
+          <div 
+            className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-[#252525] h-[100dvh] lg:h-full flex flex-col justify-center relative snap-start shrink-0"
+            style={{ background: "linear-gradient(180deg, #111, #333, #111)" }}
+          >
             <div className="lg:sticky lg:top-0 w-full h-full flex flex-col justify-center items-center p-4">
               <IDCard />
+            </div>
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:hidden text-[#8b949e] text-xs animate-bounce flex flex-col items-center">
+              <span>Scroll for Terminal</span>
+              <span className="mt-1">↓</span>
             </div>
           </div>
 
           {/* Terminal Interface Column */}
-          <div className="lg:col-span-2 bg-[#050608] h-[100dvh] lg:h-auto flex flex-col snap-start relative">
+          <div className="lg:col-span-2 bg-[#050608] h-[100dvh] lg:h-full flex flex-col snap-start relative shrink-0">
             <TerminalInterface locked={locked} setLocked={setLocked} />
           </div>
         </div>

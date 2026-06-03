@@ -67,7 +67,7 @@ export default function App() {
       
       <HeroSection scrollToNext={() => scrollToSection(1)} />
       
-      <div className="w-full h-auto bg-black relative z-10 border-t border-white/5">
+      <div className="w-full h-screen snap-start bg-black relative z-10 border-t border-white/5">
         <Terminal onSwitchView={() => {}} />
       </div>
       
