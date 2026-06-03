@@ -3,14 +3,16 @@ import { useState } from 'react';
 
 interface NavigationProps {
   currentSection: number;
+  onNavigate: (index: number) => void;
+  totalSections: number;
 }
 
-export default function Navigation({ currentSection }: NavigationProps) {
-  const sections = ['Hero', 'About', 'Photography', 'Poetry'];
+export default function Navigation({ currentSection, onNavigate, totalSections }: NavigationProps) {
+  const sections = ['Hero', 'Terminal', 'About', 'Photography', 'Poetry'];
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const scrollToSection = (index: number) => {
-    window.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
+  const handleNavClick = (index: number) => {
+    onNavigate(index);
     setMenuOpen(false);
   };
 
@@ -31,7 +33,7 @@ export default function Navigation({ currentSection }: NavigationProps) {
         {/* Desktop nav */}
         <div className="hidden md:flex gap-8 items-center">
           {sections.map((section, index) => (
-            <button key={section} onClick={() => scrollToSection(index)} className="relative group">
+            <button key={section} onClick={() => handleNavClick(index)} className="relative group">
               <motion.div
                 className={`text-xs tracking-[0.2em] uppercase transition-all duration-300 ${
                   currentSection === index ? 'text-[#6B8E6F]' : 'text-white/40 group-hover:text-white/70'
@@ -101,16 +103,17 @@ export default function Navigation({ currentSection }: NavigationProps) {
               {sections.map((section, index) => (
                 <motion.button
                   key={section}
-                  onClick={() => scrollToSection(index)}
+                  onClick={() => handleNavClick(index)}
                   className="relative group"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + index * 0.07 }}
                 >
                   <span
-                    className={`text-3xl font-['Anton'] lowercase tracking-wide transition-colors duration-200 ${
-                      currentSection === index ? 'text-[#6B8E6F]' : 'text-white/60 hover:text-white'
+                    className={`text-5xl sm:text-6xl uppercase tracking-[0.05em] transition-colors duration-200 ${
+                      currentSection === index ? 'text-[#6B8E6F]' : 'text-white/50 hover:text-white'
                     }`}
+                    style={{ fontFamily: 'Bebas Neue, sans-serif' }}
                   >
                     {section}
                   </span>

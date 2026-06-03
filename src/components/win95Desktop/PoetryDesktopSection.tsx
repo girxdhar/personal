@@ -136,7 +136,16 @@ export default function PoetryDesktopSection({ isActive = true }: PoetryDesktopS
         return prev;
       }
       sounds.openWindow();
-      return [...prev, w];
+      
+      // Fix for mobile: constraint window size and position
+      const safeWidth = Math.min(w.width, window.innerWidth - 10);
+      const safeHeight = Math.min(w.height, window.innerHeight - 60);
+      const safeX = Math.max(5, Math.min(w.x, window.innerWidth - safeWidth - 5));
+      const safeY = Math.max(5, Math.min(w.y, window.innerHeight - safeHeight - 40));
+      
+      const safeW = { ...w, width: safeWidth, height: safeHeight, x: safeX, y: safeY };
+      
+      return [...prev, safeW];
     });
     setActiveWindowId(w.id);
   }, []);

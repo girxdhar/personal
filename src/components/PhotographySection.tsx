@@ -411,7 +411,7 @@ export default function CreativeGallery() {
                 GIRIDHAR &#183; CREATIVE ARCHIVE
               </p>
               <h2
-                className="text-white leading-[0.88] text-[clamp(1.8rem,5.5vw,3.2rem)] transition-all duration-500"
+                className="text-white leading-[0.88] text-[clamp(1.2rem,7.5vw,2rem)] sm:text-[clamp(1.8rem,5.5vw,3.2rem)] whitespace-nowrap transition-all duration-500"
                 style={{ fontFamily: "Boldonse, sans-serif" }}
               >
                 {tab === "photos" ? "THROUGH THE LENS" : "WRITTEN THINGS"}

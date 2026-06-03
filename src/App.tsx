@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import PhotographySection from './components/PhotographySection';
 import Navigation from './components/Navigation';
+import Terminal from './components/Terminal';
 
 // Lazy load the Poetry Desktop to avoid loading all its dependencies upfront
 const PoetryDesktopSection = lazy(() => import('./components/win95Desktop/PoetryDesktopSection'));
@@ -11,7 +12,7 @@ export default function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [shouldLoadPoetry, setShouldLoadPoetry] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const totalSections = 4;
+  const totalSections = 5;
 
   const scrollToSection = (index: number) => {
     if (index < 0 || index >= totalSections) return;
@@ -19,10 +20,12 @@ export default function App() {
     const container = scrollContainerRef.current;
     
     if (container) {
-      container.scrollTo({
-        top: index * window.innerHeight,
-        behavior: 'smooth'
-      });
+      const snapElements = container.querySelectorAll('.snap-start');
+      const targetElement = snapElements[index];
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -37,9 +40,6 @@ export default function App() {
       
       if (section !== currentSection) {
         setCurrentSection(section);
-        if (section >= 3) {
-          setShouldLoadPoetry(true);
-        }
       }
     };
 
@@ -53,14 +53,6 @@ export default function App() {
     };
   }, [currentSection]);
 
-  const renderSection = (index: number, SectionComponent: React.ComponentType<any>, props = {}) => {
-    // Render section if we're close to it (for smooth scrolling)
-    if (currentSection >= index - 1) {
-      return <SectionComponent {...props} />;
-    }
-    return <div className="w-full h-screen" />; // Placeholder
-  };
-
   return (
     <div 
       ref={scrollContainerRef}
@@ -73,26 +65,40 @@ export default function App() {
         totalSections={totalSections}
       />
       
-      {renderSection(0, HeroSection, { 
-        scrollToNext: () => scrollToSection(currentSection + 1) 
-      })}
+      <HeroSection scrollToNext={() => scrollToSection(1)} />
       
-      {renderSection(1, AboutSection)}
+      <div className="w-full h-screen snap-start bg-black flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 relative z-10 border-t border-white/5">
+        <div className="w-full h-full max-h-[800px] flex flex-col overflow-hidden">
+          <Terminal onSwitchView={() => {}} />
+        </div>
+      </div>
       
-      {renderSection(2, PhotographySection)}
+      <AboutSection />
       
-      {/* Poetry Desktop Section - only loads when we reach section 3 */}
-      {shouldLoadPoetry ? (
-        <Suspense fallback={
-          <div className="w-full h-screen flex items-center justify-center bg-teal-600">
-            <div className="text-white text-2xl">Loading Poetry Desktop...</div>
+      <PhotographySection />
+      
+      {/* Poetry Desktop Section */}
+      <div className="w-full h-screen snap-start flex items-center justify-center bg-[#0a0a0a] relative z-10 border-t border-white/10">
+        {!shouldLoadPoetry ? (
+          <div className="text-center flex flex-col items-center gap-6 p-6">
+            <p className="font-mono text-white/50 text-xs tracking-widest uppercase">Windows 95 Poetry Experience</p>
+            <button 
+              onClick={() => setShouldLoadPoetry(true)}
+              className="px-8 py-4 bg-white text-black font-['Space_Mono'] text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-transparent hover:text-white border border-white transition-all duration-300"
+            >
+              Boot System
+            </button>
           </div>
-        }>
-          <PoetryDesktopSection isActive={currentSection === 3} />
-        </Suspense>
-      ) : (
-        <div className="w-full h-screen" />
-      )}
+        ) : (
+          <Suspense fallback={
+            <div className="w-full h-full flex items-center justify-center bg-teal-800">
+              <div className="text-white text-lg font-mono tracking-widest">Loading OS...</div>
+            </div>
+          }>
+            <PoetryDesktopSection isActive={currentSection === 3} />
+          </Suspense>
+        )}
+      </div>
     </div>
   );
 }

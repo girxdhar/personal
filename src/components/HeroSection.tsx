@@ -7,14 +7,14 @@ interface HeroSectionProps {
 }
 
 // Motion graphic line drawing text animation
-const DrawText = ({ text, delay = 0, charDelay = 0.1 }: { text: string; delay?: number; charDelay?: number }) => (
+const DrawText = ({ text, delay = 0, charDelay = 0.1, color = 'white' }: { text: string; delay?: number; charDelay?: number; color?: string }) => (
   <>
     {text.split('').map((char, i) => (
       <motion.span
         key={i}
         className="inline-block relative"
         style={{
-          WebkitTextStroke: '2px white',
+          WebkitTextStroke: `2px ${color}`,
           WebkitTextFillColor: 'transparent',
         }}
         initial={{ 
@@ -27,7 +27,7 @@ const DrawText = ({ text, delay = 0, charDelay = 0.1 }: { text: string; delay?: 
           opacity: [0, 1, 1, 1],
           scale: [0.8, 1.05, 1],
           WebkitTextStrokeWidth: ['2px', '2px', '0px'],
-          WebkitTextFillColor: ['transparent', 'transparent', 'white'],
+          WebkitTextFillColor: ['transparent', 'transparent', color],
         }}
         transition={{ 
           delay: delay + i * charDelay,
@@ -72,12 +72,15 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <h1 className="text-center text-white text-[8.5vw] sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight font-serif whitespace-nowrap px-4 flex justify-center items-center gap-2 sm:gap-3 md:gap-4">
-            <span className="inline-block">
-              <DrawText text="Let's make" delay={0.5} charDelay={0.08} />
+          <h1 
+            className="text-center text-white text-[5.5vw] sm:text-[4.5vw] lg:text-[3.8vw] xl:text-[3.2vw] leading-none tracking-tighter font-serif whitespace-nowrap flex justify-center items-center gap-1 sm:gap-2"
+          >
+            <span className="inline-flex">
+              <DrawText text="Art is " delay={0.5} charDelay={0.05} />
+              <DrawText text="violence" delay={0.85} charDelay={0.05} color="#cc0000" />
             </span>
-            <span className="inline-block italic">
-              <DrawText text="it move." delay={1.4} charDelay={0.1} />
+            <span className="inline-block italic pr-1">
+              <DrawText text="that learned restraint." delay={1.4} charDelay={0.05} />
             </span>
           </h1>
         </motion.div>
