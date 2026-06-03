@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import wallpaper2 from '../win95Desktop/assets/wallpaper2.jpg';
-import wallpaper3 from '../win95Desktop/assets/wallpaper3.jpg';
-import wallpaper4 from '../win95Desktop/assets/wallpaper4.jpg';
-import wallpaper5 from '../win95Desktop/assets/wallpaper5.jpg';
-import wallpaper1 from '../win95Desktop/assets/wallpaper1.jpg'
+import wallpaper1 from '../win95Desktop/assets/wallpaper1.png'
+import wallpaper2 from '../win95Desktop/assets/wallpaper2.png';
+import wallpaper3 from '../win95Desktop/assets/wallpaper3.png';
+import wallpaper4 from '../win95Desktop/assets/wallpaper4.png';
+import wallpaper5 from '../win95Desktop/assets/wallpaper5.png';
 
 interface DesktopProps {
   wallpaper: string;

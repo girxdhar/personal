@@ -150,15 +150,15 @@ const bootLines = [
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 flex-1 overflow-y-auto lg:overflow-hidden">
-        <div className="lg:col-span-1 bg-black border-b lg:border-b-0 lg:border-r border-[#252525] py-8 lg:py-0 flex flex-col justify-center relative shrink-0">
+      <div className="grid grid-cols-1 lg:grid-cols-3 flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
+        <div className="lg:col-span-1 bg-black border-b lg:border-b-0 lg:border-r border-[#252525] py-8 lg:py-0 flex flex-col justify-center relative">
           <div className="w-full">
             <IDCard />
           </div>
         </div>
 
-        <div className="lg:col-span-2 bg-[#050608] flex flex-col min-h-[400px] lg:min-h-0">
-          <div className="px-6 py-3 border-b border-[#252525] bg-[#0b0f14] text-xs flex items-center gap-2 flex-wrap sm:text-xs">
+        <div className="lg:col-span-2 bg-[#050608] flex flex-col min-h-[500px] lg:min-h-0 h-full">
+          <div className="px-6 py-3 border-b border-[#252525] bg-[#0b0f14] text-xs flex items-center gap-2 flex-wrap sm:text-xs shrink-0">
             <span className="text-white">giri</span>
             <span className="text-[#6b7280]">@</span>
             <span className="text-[#58a6ff]">terminal</span>
@@ -179,7 +179,7 @@ const bootLines = [
 
           <div
             ref={termRef}
-            className="p-4 flex-1 overflow-y-auto lg:h-[600px]"
+            className="p-4 flex-1 overflow-y-auto min-h-0"
             onClick={() => inputRef.current?.focus()}
           >
             {booting ? (
@@ -224,7 +224,6 @@ const bootLines = [
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handleEnter}
-                      autoFocus
                       className="flex-1 bg-transparent text-[#e5e7eb] outline-none text-sm sm:text-xs ml-2"
                       spellCheck={false}
                     />
