@@ -140,7 +140,7 @@ export default function AboutSection() {
         │  RIGHT(clamp): identities / into / contact           │
         └──────────────────────────────────────────────────────┘
       */}
-      <div className="w-full min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+      <div className="w-full h-screen snap-start relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[32px] border-black box-border">
 
 
         {/* ── TOP BAR ───────────────────────────────── */}
@@ -160,7 +160,7 @@ export default function AboutSection() {
 
         {/* ── BODY (below topbar) ───────────────────── */}
         <div className="flex flex-col lg:flex-row lg:overflow-hidden"
-             style={{ height: "calc(100vh - 43px)" }}
+             style={{ height: "calc(100vh - 43px - 32px)" }}
         >
 
 

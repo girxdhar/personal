@@ -61,7 +61,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
   }, []);
 
   return (
-    <section className="h-screen relative overflow-hidden bg-black flex items-center justify-center">
+    <section className="h-screen w-full snap-start relative z-0 overflow-hidden bg-black flex items-center justify-center">
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center">
         
@@ -72,11 +72,11 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <h1 className="text-center text-white text-6xl leading-tight tracking-tight font-serif">
-            <span className="block">
+          <h1 className="text-center text-white text-[8.5vw] sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight font-serif whitespace-nowrap px-4 flex justify-center items-center gap-2 sm:gap-3 md:gap-4">
+            <span className="inline-block">
               <DrawText text="Let's make" delay={0.5} charDelay={0.08} />
             </span>
-            <span className="block italic">
+            <span className="inline-block italic">
               <DrawText text="it move." delay={1.4} charDelay={0.1} />
             </span>
           </h1>
@@ -141,7 +141,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
           transition={{ duration: 1.5, delay: 2.5, ease: "easeOut" }}
         >
           <p
-            className="text-white text-3xl tracking-wide"
+            className="text-white tracking-wide whitespace-nowrap text-[3.5vw] sm:text-xl md:text-3xl px-4"
             style={{ fontFamily: 'Didot, Georgia, serif' }}
           >
             A creative portfolio where art meets code
