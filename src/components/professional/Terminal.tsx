@@ -32,21 +32,21 @@ export default function Terminal({ onSwitchView }) {
         </button>
 
         {/* Global Terminal Header */}
-        <div className="bg-[#0b0f14] px-4 py-2 flex items-center justify-between border-b border-[#252525] shrink-0">
-          <div className="flex items-center gap-3">
+        <div className="bg-[#050608] px-4 py-2 flex items-center justify-between border-b border-[#1d1d1d] shrink-0 font-mono">
+          <div className="flex items-center gap-4">
             <div className="flex gap-2">
               <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
               <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
               <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
             </div>
-            <span className="text-xs text-[#8b949e] font-bold tracking-widest uppercase">Giridhar / System</span>
+            <span className="text-sm text-[#8b949e]">giri@portfolio:~</span>
           </div>
-          <div className="flex items-center gap-4 text-xs text-[#8b949e]">
+          <div className="flex items-center gap-4 text-sm text-[#8b949e]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#059232] shadow-[0_0_8px_#059232] animate-pulse"></span>
-              <span className="uppercase tracking-wider font-bold text-[#059232]">Sys.Online</span>
+              <span className="w-2 h-2 rounded-full bg-[#059232]"></span>
+              <span>online</span>
             </div>
-            <div className="opacity-70 font-mono hidden sm:block">{time}</div>
+            <div className="opacity-70">{time}</div>
           </div>
         </div>
 
