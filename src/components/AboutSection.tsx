@@ -122,6 +122,8 @@ export default function AboutSection() {
         ".ar-proj:hover .ar-pn{color:#fff}",
         ".ar-proj:hover .ar-arrow{opacity:1;transform:translate(3px,-3px)}",
         ".ar-clink:hover .ar-cdot{background:#fff}",
+        "@keyframes ar-electric { 0%, 100% { box-shadow: 0 0 5px #fff, inset 0 0 2px #fff; border-color: rgba(255,255,255,0.8); } 10% { box-shadow: 0 0 18px #fff, inset 0 0 10px #fff; border-color: #fff; text-shadow: 0 0 8px #fff; } 12% { box-shadow: 0 0 2px #fff; border-color: rgba(255,255,255,0.4); text-shadow: none; } 14% { box-shadow: 0 0 25px #fff, inset 0 0 15px #fff; border-color: #fff; text-shadow: 0 0 12px #fff; } 40% { box-shadow: 0 0 5px #fff, inset 0 0 3px #fff; border-color: rgba(255,255,255,0.7); } 60% { box-shadow: 0 0 2px #fff; border-color: rgba(255,255,255,0.3); } 62% { box-shadow: 0 0 20px #fff, inset 0 0 12px #fff; border-color: #fff; text-shadow: 0 0 10px #fff; } }",
+        ".ar-electric { animation: ar-electric 4s infinite; }",
       ].join("")}</style>
 
 
@@ -307,23 +309,18 @@ export default function AboutSection() {
 
             {/* ── RESUME BTN ────────────────────────── */}
             <div className="ar-fi ar-d5 shrink-0 px-5 lg:px-9 pb-5 pt-3">
-              <div className="relative inline-flex group">
-                {/* Animated ping ring */}
-                <div className="absolute inset-0 bg-white/40 animate-ping opacity-20 rounded-sm"></div>
-                <a href="https://girxdhar.github.io/pro"
-                   className="relative inline-flex items-center gap-2
-                              font-['Space_Mono'] text-[9px] font-bold tracking-[0.25em]
-                              text-black bg-white border border-white
-                              px-6 py-2.5 no-underline uppercase
-                              transition-all duration-300 hover:bg-black hover:text-white hover:border-white
-                              shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.6)]">
-                  ACCESS [PRO]
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-                       stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                    <path d="M7 17L17 7M7 7h10v10"/>
-                  </svg>
-                </a>
-              </div>
+              <a href="https://girxdhar.github.io/pro"
+                 className="ar-electric relative inline-flex items-center gap-2
+                            font-['Space_Mono'] text-[8px] sm:text-[9px] font-bold tracking-[0.25em]
+                            text-white bg-transparent border border-white
+                            px-6 py-3 no-underline uppercase
+                            transition-all duration-300 hover:bg-white hover:text-black">
+                PROFESSIONAL PROFILE
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
+              </a>
             </div>
 
 
