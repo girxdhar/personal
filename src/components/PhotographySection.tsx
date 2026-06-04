@@ -2,6 +2,7 @@
 
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 
 const PHOTOS = [
@@ -59,20 +60,22 @@ function Lightbox({ photo, onClose }) {
   }, [onClose]);
 
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 lg:p-8"
       style={{ background: "rgba(4,4,4,0.97)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[96vw] sm:max-w-[88vw] lg:max-w-[960px] flex flex-col lg:flex-row bg-[#0d0d0d] border border-white/10 overflow-y-auto"
+        className="relative w-full max-w-[98vw] sm:max-w-[92vw] lg:max-w-[1200px] flex flex-col lg:flex-row bg-[#0d0d0d] border border-white/10 overflow-y-auto"
         style={{ maxHeight: "90vh", boxShadow: "0 0 100px rgba(0,0,0,0.9)" }}
         onClick={(e) => e.stopPropagation()}
       >
         <div
           className="relative cursor-pointer bg-[#080808] w-full flex-shrink-0 lg:flex-1"
-          style={{ height: isPortrait ? "clamp(240px, 55vw, 60vh)" : "clamp(200px, 45vw, 55vh)" }}
+          style={{ height: isPortrait ? "clamp(300px, 65vw, 75vh)" : "clamp(250px, 55vw, 65vh)" }}
           onClick={() => setColored((v) => !v)}
         >
           <img
@@ -134,7 +137,8 @@ function Lightbox({ photo, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -403,8 +407,8 @@ export default function CreativeGallery() {
       ].join("")}</style>
 
 
-      <div className="w-full min-h-screen snap-start relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[24px] border-black box-border">
-        <div className="sticky top-0 z-50 bg-[#0a0a0a]">
+      <div className="w-full min-h-screen snap-start snap-always relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[24px] border-black box-border">
+        <div className="sticky top-0 z-50 bg-[#0a0a0a] pt-4 lg:pt-6">
           <div className="border-b border-white/10 px-5 lg:px-8 py-4 lg:py-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <div>
               <p className="font-mono text-[7.5px] tracking-[0.3em] uppercase text-white/30 mb-1.5">

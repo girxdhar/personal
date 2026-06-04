@@ -122,8 +122,8 @@ export default function AboutSection() {
         ".ar-proj:hover .ar-pn{color:#fff}",
         ".ar-proj:hover .ar-arrow{opacity:1;transform:translate(3px,-3px)}",
         ".ar-clink:hover .ar-cdot{background:#fff}",
-        "@keyframes ar-electric { 0%, 100% { box-shadow: 0 0 5px #fff, inset 0 0 2px #fff; border-color: rgba(255,255,255,0.8); } 10% { box-shadow: 0 0 18px #fff, inset 0 0 10px #fff; border-color: #fff; text-shadow: 0 0 8px #fff; } 12% { box-shadow: 0 0 2px #fff; border-color: rgba(255,255,255,0.4); text-shadow: none; } 14% { box-shadow: 0 0 25px #fff, inset 0 0 15px #fff; border-color: #fff; text-shadow: 0 0 12px #fff; } 40% { box-shadow: 0 0 5px #fff, inset 0 0 3px #fff; border-color: rgba(255,255,255,0.7); } 60% { box-shadow: 0 0 2px #fff; border-color: rgba(255,255,255,0.3); } 62% { box-shadow: 0 0 20px #fff, inset 0 0 12px #fff; border-color: #fff; text-shadow: 0 0 10px #fff; } }",
-        ".ar-electric { animation: ar-electric 4s infinite; }",
+        "@keyframes ar-electric { 0%, 100% { box-shadow: 0 0 4px rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); text-shadow: none; } 50% { box-shadow: 0 0 12px rgba(255,255,255,0.5), inset 0 0 4px rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.9); text-shadow: 0 0 4px rgba(255,255,255,0.4); } }",
+        ".ar-electric { animation: ar-electric 3s ease-in-out infinite; }",
       ].join("")}</style>
 
 
@@ -146,7 +146,7 @@ export default function AboutSection() {
         │  RIGHT(clamp): identities / into / contact           │
         └──────────────────────────────────────────────────────┘
       */}
-      <div className="w-full h-screen snap-start relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[32px] border-black box-border">
+      <div className="w-full min-h-screen snap-start snap-always relative bg-[#0a0a0a] text-white overflow-x-hidden border-b-[32px] border-black box-border flex flex-col">
 
 
         {/* ── TOP BAR ───────────────────────────────── */}
@@ -165,18 +165,16 @@ export default function AboutSection() {
 
 
         {/* ── BODY (below topbar) ───────────────────── */}
-        <div className="flex flex-col lg:flex-row lg:overflow-hidden"
-             style={{ height: "calc(100vh - 43px - 32px)" }}
-        >
+        <div className="flex flex-col lg:flex-row flex-1">
 
 
           {/* ════════ LEFT PANEL ════════ */}
-          <div className="flex flex-col flex-1 lg:overflow-hidden lg:border-r lg:border-white/10">
+          <div className="flex flex-col flex-1 lg:border-r lg:border-white/10">
 
 
             {/* ── HERO ROW: text | photo ─────────────── */}
             {/* min-h on mobile is fixed so scramble animation never causes layout reflow */}
-            <div className="flex items-stretch flex-1 lg:max-h-[55%] min-h-[220px] sm:min-h-[260px]">
+            <div className="flex items-stretch flex-1 min-h-[220px] sm:min-h-[260px]">
 
 
               {/* Text side — clip X only so scramble never pushes layout width, but font ascenders/descenders are never cut */}
@@ -262,10 +260,9 @@ export default function AboutSection() {
 
 
             {/* ── PROJECTS ──────────────────────────── */}
-            <div className="ar-fi ar-d4 shrink-0 lg:shrink lg:flex-1 lg:min-h-0 lg:overflow-y-auto
+            <div className="ar-fi ar-d4 shrink-0 lg:shrink lg:flex-1
                             px-5 lg:px-9 pt-5 pb-4
-                            border-t border-white/10"
-                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                            border-t border-white/10">
               <L c="Making Things" />
               {PROJECTS.map((p, i) => (
                 <div key={i}
@@ -339,8 +336,7 @@ export default function AboutSection() {
           <div className="flex flex-col relative
                           border-t border-white/10
                           lg:border-t-0 lg:border-l lg:border-white/10
-                          lg:w-[clamp(260px,26vw,340px)] lg:shrink-0
-                          lg:overflow-y-auto">
+                          lg:w-[clamp(260px,26vw,340px)] lg:shrink-0">
 
 
             {/* Ghost watermark */}

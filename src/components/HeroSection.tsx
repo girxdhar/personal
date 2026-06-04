@@ -61,7 +61,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
   }, []);
 
   return (
-    <section className="h-screen w-full snap-start relative z-0 overflow-hidden bg-black flex items-center justify-center">
+    <section className="h-screen w-full snap-start snap-always relative z-0 overflow-hidden bg-black flex items-center justify-center">
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center">
         
@@ -73,13 +73,15 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
           transition={{ delay: 0.2, duration: 0.8 }}
         >
           <h1 
-            className="text-center text-white text-[5.5vw] sm:text-[4.5vw] lg:text-[3.8vw] xl:text-[3.2vw] leading-none tracking-tighter font-serif whitespace-nowrap flex justify-center items-center gap-1 sm:gap-2"
+            className="text-center text-white text-[6.5vw] sm:text-[5.5vw] lg:text-[4.8vw] xl:text-[4.2vw] leading-none tracking-tighter font-serif font-bold whitespace-nowrap flex justify-center items-center gap-1 sm:gap-2"
           >
-            <span className="inline-flex">
+            <span className="inline-flex items-center">
               <DrawText text="Art is " delay={0.5} charDelay={0.05} />
-              <DrawText text="violence" delay={0.85} charDelay={0.05} color="#cc0000" />
+              <span className="italic">
+                <DrawText text="violence" delay={0.85} charDelay={0.05} color="#cc0000" />
+              </span>
             </span>
-            <span className="inline-block italic pr-1">
+            <span className="inline-block pr-1 not-italic">
               <DrawText text="that learned restraint." delay={1.4} charDelay={0.05} />
             </span>
           </h1>
@@ -147,7 +149,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
             className="text-white tracking-wide whitespace-nowrap text-[3.5vw] sm:text-xl md:text-3xl px-4"
             style={{ fontFamily: 'Didot, Georgia, serif' }}
           >
-            A creative portfolio where art meets code
+            Where aesthetic precision meets technical rigor
           </p>
         </motion.div>
       </div>
