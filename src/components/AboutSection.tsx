@@ -3,19 +3,22 @@
 
 import { useState, useEffect } from "react";
 import giridhar from "@/assets/giridhar.png";
+import { Twitter, Instagram, Github, Mail } from "lucide-react";
 
 
 /* ── DATA ─────────────────────────────────────────────── */
 const PROJECTS = [
-  { n: "Velocity UI",  t: "Design System",   y: "2024", url: "#" },
-  { n: "Chartflow",    t: "Interactive Data", y: "2023", url: "#" },
-  { n: "PaperCMS",     t: "Side Project",     y: "2023", url: "#" },
+  { n: "Velocity UI",  t: "Design System",   y: "2024", url: "#", d: "A comprehensive design system for modern web apps." },
+  { n: "Chartflow",    t: "Interactive Data", y: "2023", url: "#", d: "Data visualization library with high performance." },
+  { n: "PaperCMS",     t: "Side Project",     y: "2023", url: "#", d: "Headless CMS tailored for editorial teams." },
+  { n: "Nexas",        t: "E-Commerce",       y: "2022", url: "#", d: "Scalable frontend architecture for retail." },
+  { n: "Lumiere",      t: "Creative Studio",  y: "2022", url: "#", d: "Award winning creative portfolio template." },
 ];
 const CONTACTS = [
-  { l: "TWITTER",   h: "#" },
-  { l: "INSTAGRAM", h: "#" },
-  { l: "GITHUB",    h: "#" },
-  { l: "EMAIL",     h: "mailto:you@example.com" },
+  { l: "TWITTER",   h: "#", Icon: Twitter },
+  { l: "INSTAGRAM", h: "#", Icon: Instagram },
+  { l: "GITHUB",    h: "#", Icon: Github },
+  { l: "EMAIL",     h: "mailto:you@example.com", Icon: Mail },
 ];
 const QUOTES = [
   "DESIGN IS JUST VIOLENCE WITH BETTER TYPOGRAPHY",
@@ -97,6 +100,7 @@ const L = ({ c }) => (
 /* ── ROOT ────────────────────────────────────────────── */
 export default function AboutSection() {
   const name = useScramble("giridhar");
+  const [openProject, setOpenProject] = useState<number | null>(null);
 
 
   return (
@@ -256,43 +260,54 @@ export default function AboutSection() {
 
 
             {/* ── PROJECTS ──────────────────────────── */}
-            <div className="ar-fi ar-d4 shrink-0
+            <div className="ar-fi ar-d4 shrink-0 lg:shrink lg:flex-1 lg:min-h-0 lg:overflow-y-auto
                             px-5 lg:px-9 pt-5 pb-4
-                            border-t border-white/10">
+                            border-t border-white/10"
+                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
               <L c="Making Things" />
               {PROJECTS.map((p, i) => (
-                <a key={i} href={p.url}
-                   className="ar-proj flex items-center justify-between
-                              py-2 border-b border-white/[0.08] last:border-b-0
-                              no-underline">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-mono text-[9px] text-white/30">0{i+1}</span>
-                    <span className="ar-pn font-['Bebas_Neue'] text-[19px] tracking-[0.05em]
-                                     text-white/75 transition-colors duration-150">
-                      {p.n}
-                    </span>
-                    <span className="hidden sm:inline font-['Space_Mono'] text-[8px]
-                                     tracking-[0.14em] text-white/40">
-                      {p.t}
-                    </span>
+                <div key={i}
+                     className="ar-proj flex flex-col justify-center
+                                py-2 border-b border-white/[0.08] last:border-b-0 cursor-pointer"
+                     onClick={() => setOpenProject(openProject === i ? null : i)}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-mono text-[9px] text-white/30">0{i+1}</span>
+                      <a href={p.url} onClick={(e) => e.stopPropagation()}
+                         className="ar-pn font-['Bebas_Neue'] text-[19px] tracking-[0.05em]
+                                    text-white/75 transition-colors duration-150 hover:text-white no-underline">
+                        {p.n}
+                      </a>
+                      <span className="hidden sm:inline font-['Space_Mono'] text-[8px]
+                                       tracking-[0.14em] text-white/40">
+                        {p.t}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[9px] text-white/30">{p.y}</span>
+                      <svg className={`ar-arrow transition-all duration-300 shrink-0 ${openProject === i ? 'rotate-90 opacity-100' : 'opacity-20'}`}
+                           width="11" height="11" viewBox="0 0 24 24"
+                           fill="none" stroke="rgba(255,255,255,0.9)"
+                           strokeWidth="2" strokeLinecap="round">
+                        <path d="M9 18l6-6-6-6"/>
+                      </svg>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-[9px] text-white/30">{p.y}</span>
-                    <svg className="ar-arrow opacity-20 transition-all duration-150 shrink-0"
-                         width="11" height="11" viewBox="0 0 24 24"
-                         fill="none" stroke="rgba(255,255,255,0.9)"
-                         strokeWidth="2" strokeLinecap="round">
-                      <path d="M7 17L17 7M7 7h10v10"/>
-                    </svg>
+                  
+                  {/* Accordion Content */}
+                  <div className={`overflow-hidden transition-all duration-300 ${openProject === i ? 'max-h-20 mt-2 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <p className="font-['Space_Mono'] text-[10px] text-white/60 leading-relaxed pl-5">
+                      {p.d}
+                    </p>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
 
 
             {/* ── RESUME BTN ────────────────────────── */}
             <div className="ar-fi ar-d5 shrink-0 px-5 lg:px-9 pb-5">
-              <a href="#"
+              <a href="https://girxdhar.github.io/pro"
                  className="inline-flex items-center gap-2
                             font-['Space_Mono'] text-[8px] font-bold tracking-[0.22em]
                             text-black bg-white border border-white
@@ -382,16 +397,20 @@ export default function AboutSection() {
                             px-5 lg:px-7 py-5 lg:py-6">
               <L c="Find Me" />
               <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-5">
-                {CONTACTS.map(c => (
-                  <a key={c.l} href={c.h}
-                     className="ar-clink font-['Space_Mono'] text-[9px] tracking-[0.18em]
-                                no-underline text-white/55 flex items-center gap-2
-                                transition-colors duration-150 hover:text-white">
-                    <span className="ar-cdot w-[5px] h-[5px] rounded-full bg-white/30
-                                     shrink-0 transition-colors duration-150" />
-                    {c.l}
-                  </a>
-                ))}
+                {CONTACTS.map(c => {
+                  const Icon = c.Icon;
+                  return (
+                    <a key={c.l} href={c.h}
+                       className="ar-clink font-['Space_Mono'] text-[9px] tracking-[0.18em]
+                                  no-underline text-white/55 flex items-center gap-2
+                                  transition-all duration-200 hover:text-white group">
+                      <div className="bg-white/5 p-1.5 rounded-md border border-white/10 group-hover:bg-white group-hover:text-black transition-all duration-200">
+                        <Icon size={12} strokeWidth={2} />
+                      </div>
+                      {c.l}
+                    </a>
+                  );
+                })}
               </div>
               <div className="flex items-center justify-between">
                 <span className="font-['Bebas_Neue'] text-[20px] text-white/[0.10] tracking-[0.06em]">
