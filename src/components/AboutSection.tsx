@@ -306,19 +306,24 @@ export default function AboutSection() {
 
 
             {/* ── RESUME BTN ────────────────────────── */}
-            <div className="ar-fi ar-d5 shrink-0 px-5 lg:px-9 pb-5">
-              <a href="https://girxdhar.github.io/pro"
-                 className="inline-flex items-center gap-2
-                            font-['Space_Mono'] text-[8px] font-bold tracking-[0.22em]
-                            text-black bg-white border border-white
-                            px-5 py-2.5 no-underline
-                            transition-all duration-200 hover:bg-transparent hover:text-white">
-                VIEW RESUME
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <path d="M7 17L17 7M7 7h10v10"/>
-                </svg>
-              </a>
+            <div className="ar-fi ar-d5 shrink-0 px-5 lg:px-9 pb-5 pt-3">
+              <div className="relative inline-flex group">
+                {/* Animated ping ring */}
+                <div className="absolute inset-0 bg-white/40 animate-ping opacity-20 rounded-sm"></div>
+                <a href="https://girxdhar.github.io/pro"
+                   className="relative inline-flex items-center gap-2
+                              font-['Space_Mono'] text-[9px] font-bold tracking-[0.25em]
+                              text-black bg-white border border-white
+                              px-6 py-2.5 no-underline uppercase
+                              transition-all duration-300 hover:bg-black hover:text-white hover:border-white
+                              shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.6)]">
+                  ACCESS [PRO]
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </a>
+              </div>
             </div>
 
 
