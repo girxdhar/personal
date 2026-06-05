@@ -39,26 +39,39 @@ const PHOTOS_PER_PAGE = 8;
 const POEMS_PER_PAGE  = 8;
 
 
-function Lightbox({ photo, onClose }) {
+function Lightbox({ photo, onClose, onPrev, onNext }) {
   const [colored, setColored] = useState(false);
   const [loaded,  setLoaded]  = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
   const isPortrait = photo.aspect === "tall" || photo.aspect === "portrait";
-
 
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const t = setTimeout(() => setColored(true), 420);
     return () => { document.body.style.overflow = prev; clearTimeout(t); };
-  }, []);
-
+  }, [photo]);
 
   useEffect(() => {
-    const h = (e) => { if (e.key === "Escape") onClose(); };
+    let lastWheelTime = 0;
+    const h = (e) => { 
+      if (e.key === "Escape") onClose(); 
+      if (e.key === "ArrowLeft") onPrev?.();
+      if (e.key === "ArrowRight") onNext?.();
+    };
+    const wheel = (e) => {
+      const now = Date.now();
+      if (now - lastWheelTime < 500) return;
+      if (e.deltaX > 20 || e.deltaY > 20) { onNext?.(); lastWheelTime = now; }
+      else if (e.deltaX < -20 || e.deltaY < -20) { onPrev?.(); lastWheelTime = now; }
+    };
     window.addEventListener("keydown", h);
-    return () => window.removeEventListener("keydown", h);
-  }, [onClose]);
-
+    window.addEventListener("wheel", wheel, { passive: true });
+    return () => { 
+      window.removeEventListener("keydown", h); 
+      window.removeEventListener("wheel", wheel); 
+    };
+  }, [onClose, onPrev, onNext]);
 
   if (typeof document === "undefined") return null;
 
@@ -67,6 +80,12 @@ function Lightbox({ photo, onClose }) {
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 lg:p-8"
       style={{ background: "rgba(4,4,4,0.97)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
       onClick={onClose}
+      onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
+      onTouchEnd={(e) => {
+        const touchEnd = e.changedTouches[0].clientX;
+        if (touchStart - touchEnd > 50) onNext?.();
+        if (touchStart - touchEnd < -50) onPrev?.();
+      }}
     >
       <div
         className="relative w-full max-w-[98vw] sm:max-w-[92vw] lg:max-w-[1200px] flex flex-col lg:flex-row bg-[#0d0d0d] border border-white/10 overflow-y-auto"
@@ -81,12 +100,12 @@ function Lightbox({ photo, onClose }) {
           <img
             src={photo.src}
             alt={photo.title}
-            className={"absolute inset-0 w-full h-full " + (isPortrait ? "object-contain" : "object-cover")}
+            className="absolute inset-0 w-full h-full object-contain"
           />
           <img
             src={photo.src}
             alt=""
-            className={"absolute inset-0 w-full h-full transition-opacity duration-700 " + (isPortrait ? "object-contain" : "object-cover")}
+            className="absolute inset-0 w-full h-full transition-opacity duration-700 object-contain"
             style={{ filter: "grayscale(1) contrast(1.08)", opacity: colored ? 0 : 1 }}
             onLoad={() => setLoaded(true)}
           />
@@ -130,9 +149,9 @@ function Lightbox({ photo, onClose }) {
             </button>
             <button
               onClick={onClose}
-              className="w-8 h-8 border border-white/20 text-white/40 flex items-center justify-center text-sm hover:bg-white hover:text-black transition-all duration-200"
+              className="font-mono text-[8.5px] tracking-[0.2em] font-bold uppercase border border-white/30 text-white/80 px-4 py-2 hover:bg-white hover:text-black transition-all duration-200"
             >
-              &#x2715;
+              CLOSE
             </button>
           </div>
         </div>
@@ -203,64 +222,75 @@ function PhotosTab() {
   const [active, setActive] = useState(null);
   const [page,   setPage]   = useState(1);
 
-
   const start   = (page - 1) * PHOTOS_PER_PAGE;
   const visible = PHOTOS.slice(start, start + PHOTOS_PER_PAGE);
-
 
   function goPage(p) {
     setPage(p);
     document.getElementById("cg-photos-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  const handlePrev = () => {
+    if (!active) return;
+    const idx = PHOTOS.findIndex(p => p.id === active.id);
+    if (idx > 0) setActive(PHOTOS[idx - 1]);
+  };
+
+  const handleNext = () => {
+    if (!active) return;
+    const idx = PHOTOS.findIndex(p => p.id === active.id);
+    if (idx < PHOTOS.length - 1) setActive(PHOTOS[idx + 1]);
+  };
+
+  const renderPhoto = (photo, idx) => (
+    <div
+      key={photo.id}
+      className="snap-start break-inside-avoid mb-3 lg:mb-4 group cursor-pointer relative overflow-hidden cg-fi w-full"
+      style={{ animationDelay: idx * 0.05 + "s" }}
+      onClick={() => setActive(photo)}
+    >
+      <div
+        className={
+          "relative overflow-hidden " +
+          (photo.aspect === "portrait" ? "aspect-[9/16]" :
+           photo.aspect === "tall"     ? "aspect-[2/3]"  :
+           photo.aspect === "wide"     ? "aspect-[4/3]"  : "aspect-square")
+        }
+      >
+        <img
+          src={photo.src}
+          alt={photo.title}
+          className={"absolute inset-0 w-full h-full " + (photo.aspect === "portrait" ? "object-contain" : "object-cover")}
+        />
+        <img
+          src={photo.src}
+          alt=""
+          className={"absolute inset-0 w-full h-full scale-100 transition-all duration-700 ease-out group-hover:opacity-0 group-hover:scale-[1.04] " + (photo.aspect === "portrait" ? "object-contain" : "object-cover")}
+          style={{ filter: "grayscale(1) contrast(1.1)" }}
+        />
+        <div className="absolute inset-0 bg-black/45 transition-opacity duration-500 group-hover:opacity-10" />
+        <div className="absolute bottom-0 inset-x-0 p-3 translate-y-1 transition-all duration-300 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
+          <p className="text-white text-[16px] tracking-[0.06em] leading-none" style={{ fontFamily: "Bebas Neue, sans-serif" }}>
+            {photo.title}
+          </p>
+          <p className="font-mono text-white/55 text-[7.5px] tracking-[0.18em] uppercase mt-0.5">
+            {photo.location}
+          </p>
+        </div>
+        <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full border border-white/30 transition-all duration-300 group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:shadow-[0_0_8px_#34d399]" />
+        <div className="absolute top-2.5 left-2.5 font-mono text-[7px] tracking-[0.18em] text-white/30">
+          {String(PHOTOS.findIndex(p => p.id === photo.id) + 1).padStart(2, "0")}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
-      {active && <Lightbox photo={active} onClose={() => setActive(null)} />}
-      <div id="cg-photos-grid">
-        <div className="p-4 sm:p-5 lg:p-8 columns-2 lg:columns-3 gap-3 lg:gap-4">
-          {visible.map((photo, idx) => (
-            <div
-              key={photo.id}
-              className="snap-start break-inside-avoid mb-3 lg:mb-4 group cursor-pointer relative overflow-hidden cg-fi"
-              style={{ animationDelay: idx * 0.05 + "s" }}
-              onClick={() => setActive(photo)}
-            >
-              <div
-                className={
-                  "relative overflow-hidden " +
-                  (photo.aspect === "portrait" ? "aspect-[9/16]" :
-                   photo.aspect === "tall"     ? "aspect-[2/3]"  :
-                   photo.aspect === "wide"     ? "aspect-[4/3]"  : "aspect-square")
-                }
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.title}
-                  className={"absolute inset-0 w-full h-full " + (photo.aspect === "portrait" ? "object-contain" : "object-cover")}
-                />
-                <img
-                  src={photo.src}
-                  alt=""
-                  className={"absolute inset-0 w-full h-full scale-100 transition-all duration-700 ease-out group-hover:opacity-0 group-hover:scale-[1.04] " + (photo.aspect === "portrait" ? "object-contain" : "object-cover")}
-                  style={{ filter: "grayscale(1) contrast(1.1)" }}
-                />
-                <div className="absolute inset-0 bg-black/45 transition-opacity duration-500 group-hover:opacity-10" />
-                <div className="absolute bottom-0 inset-x-0 p-3 translate-y-1 transition-all duration-300 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
-                  <p className="text-white text-[16px] tracking-[0.06em] leading-none" style={{ fontFamily: "Bebas Neue, sans-serif" }}>
-                    {photo.title}
-                  </p>
-                  <p className="font-mono text-white/55 text-[7.5px] tracking-[0.18em] uppercase mt-0.5">
-                    {photo.location}
-                  </p>
-                </div>
-                <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full border border-white/30 transition-all duration-300 group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:shadow-[0_0_8px_#34d399]" />
-                <div className="absolute top-2.5 left-2.5 font-mono text-[7px] tracking-[0.18em] text-white/30">
-                  {String(start + idx + 1).padStart(2, "0")}
-                </div>
-              </div>
-            </div>
-          ))}
+      {active && <Lightbox photo={active} onClose={() => setActive(null)} onPrev={handlePrev} onNext={handleNext} />}
+      <div id="cg-photos-grid" className="relative">
+        <div className="p-4 sm:p-5 lg:p-8 columns-2 lg:columns-3 gap-3 lg:gap-4 relative z-10">
+          {visible.map((photo, idx) => renderPhoto(photo, idx))}
         </div>
         <PaginationBar page={page} total={PHOTOS.length} perPage={PHOTOS_PER_PAGE} onPage={goPage} />
       </div>
@@ -423,20 +453,16 @@ export default function CreativeGallery({ activeTab, onTabChange }: { activeTab?
                 {tab === "photos" ? "THROUGH THE LENS" : "WRITTEN THINGS"}
               </h2>
             </div>
-            <div className="flex shrink-0 border border-white/15 self-start sm:self-auto">
+            <div className="flex shrink-0 gap-3 self-start sm:self-auto mt-2 sm:mt-0">
               {[
-                { id: "photos", label: "PHOTOGRAPHS" },
+                { id: "photos", label: "PHOTOGRAPHY" },
                 { id: "poetry", label: "POETRY"      },
-              ].map((t, i) => (
+              ].map((t) => (
                 <button
                   key={t.id}
                   onClick={() => setTab(t.id)}
-                  className="font-mono text-[7.5px] lg:text-[8px] tracking-[0.22em] uppercase px-4 lg:px-5 py-2.5 transition-all duration-200"
-                  style={{
-                    background:  tab === t.id ? "#fff" : "transparent",
-                    color:       tab === t.id ? "#000" : "rgba(255,255,255,0.4)",
-                    borderRight: i === 0 ? "1px solid rgba(255,255,255,0.15)" : "none",
-                  }}
+                  className={"font-['Space_Mono'] text-[10px] tracking-[0.2em] font-bold uppercase px-6 lg:px-8 py-2.5 transition-all duration-300 border " + 
+                    (tab === t.id ? "bg-white text-black border-white shadow-[4px_4px_0_#fff] translate-y-[-2px] translate-x-[-2px]" : "bg-[#0a0a0a] text-white/50 border-white/20 hover:text-white hover:border-white/50")}
                 >
                   {t.label}
                 </button>

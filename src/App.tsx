@@ -105,7 +105,6 @@ export default function App() {
         ) : (
           <Suspense fallback={
             <div className="w-full h-full flex items-center justify-center bg-teal-800">
-              <div className="text-white text-lg font-mono tracking-widest">Loading OS...</div>
             </div>
           }>
             <PoetryDesktopSection isActive={currentSection === 3} />
