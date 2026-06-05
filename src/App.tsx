@@ -19,13 +19,9 @@ export default function App() {
 
     const container = scrollContainerRef.current;
 
-    if (container) {
-      const snapElements = container.querySelectorAll('.snap-start');
-      const targetElement = snapElements[index];
-
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    const targetElement = document.getElementById(`section-${index}`);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -34,12 +30,22 @@ export default function App() {
     if (!container) return;
 
     const handleScroll = () => {
-      const scrollPosition = container.scrollTop;
+      let currentIdx = 0;
       const windowHeight = window.innerHeight;
-      const section = Math.round(scrollPosition / windowHeight);
 
-      if (section !== currentSection) {
-        setCurrentSection(section);
+      for (let i = 0; i < totalSections; i++) {
+        const el = document.getElementById(`section-${i}`);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // If the section's top has crossed the middle of the screen
+          if (rect.top <= windowHeight / 2) {
+            currentIdx = i;
+          }
+        }
+      }
+
+      if (currentIdx !== currentSection) {
+        setCurrentSection(currentIdx);
       }
     };
 
@@ -69,13 +75,12 @@ export default function App() {
 
       <HeroSection scrollToNext={() => scrollToSection(1)} />
 
-
       <AboutSection />
 
       <PhotographySection activeTab={galleryTab} onTabChange={setGalleryTab} />
 
       {/* Poetry Desktop Section */}
-      <div className="w-full h-screen snap-start flex items-center justify-center bg-[#0a0a0a] relative z-10 border-t border-white/10">
+      <div id="section-3" className="w-full h-screen snap-start snap-always relative z-10 flex flex-col items-center justify-center bg-black overflow-hidden border-b-[24px] border-[#0a0a0a]">
         {!shouldLoadPoetry ? (
           <div className="text-center flex flex-col items-center gap-6 p-6">
             <p className="font-mono text-white/50 text-xs tracking-widest uppercase">Windows 95 Experience</p>

@@ -245,7 +245,7 @@ function PhotosTab() {
   const renderPhoto = (photo, idx) => (
     <div
       key={photo.id}
-      className="snap-start break-inside-avoid mb-3 lg:mb-4 group cursor-pointer relative overflow-hidden cg-fi w-full"
+      className="break-inside-avoid mb-3 lg:mb-4 group cursor-pointer relative overflow-hidden cg-fi w-full"
       style={{ animationDelay: idx * 0.05 + "s" }}
       onClick={() => setActive(photo)}
     >
@@ -306,7 +306,7 @@ function PoemCard({ poem, idx }) {
 
   return (
     <article
-      className="snap-start relative border-b border-white/[0.08] last:border-b-0 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02]"
+      className="relative border-b border-white/[0.08] last:border-b-0 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02]"
       onClick={() => setOpen((v) => !v)}
     >
       <div className="flex items-start gap-5 lg:gap-8 px-5 lg:px-8 py-6 lg:py-8">
@@ -439,7 +439,7 @@ export default function CreativeGallery({ activeTab, onTabChange }: { activeTab?
       ].join("")}</style>
 
 
-      <div className="w-full min-h-screen snap-start relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[24px] border-black box-border">
+      <div id="section-2" className="w-full min-h-screen snap-start snap-always relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[24px] border-black box-border">
         <div className="sticky top-0 z-50 bg-[#0a0a0a] pt-4 lg:pt-6">
           <div className="border-b border-white/10 px-5 lg:px-8 py-4 lg:py-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <div>

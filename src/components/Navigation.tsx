@@ -67,7 +67,7 @@ export default function Navigation({ currentSection, currentGalleryTab, onNaviga
               onClick={() => handleNavClick(item)} 
               className={`font-['Space_Mono'] text-[9px] xl:text-[10px] tracking-[0.18em] transition-all duration-200 uppercase px-3 py-2 border ${
                 item.type === 'external' ? 'border-white/40 text-white hover:bg-white hover:text-black ml-2' :
-                active ? 'border-white/30 text-white bg-white/[0.05]' : 'border-transparent text-white/40 hover:text-white/80 hover:border-white/15 hover:bg-white/[0.02]'
+                active ? 'border-white bg-white text-black font-bold' : 'border-transparent text-white/40 hover:text-white/80 hover:border-white/15 hover:bg-white/[0.02]'
               }`}
             >
               {item.label}
@@ -123,7 +123,7 @@ export default function Navigation({ currentSection, currentGalleryTab, onNaviga
                     onClick={() => handleNavClick(item)}
                     className={`w-full relative group px-6 py-4 border transition-all duration-300 ${
                       item.type === 'external' ? 'border-white/40 text-white mt-4 hover:bg-white hover:text-black' :
-                      active ? 'border-white/30 text-white bg-white/[0.05]' : 'border-white/10 text-white/50 hover:text-white hover:border-white/30 hover:bg-white/[0.02]'
+                      active ? 'border-white bg-white text-black font-bold' : 'border-white/10 text-white/50 hover:text-white hover:border-white/30 hover:bg-white/[0.02]'
                     }`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

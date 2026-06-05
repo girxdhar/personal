@@ -146,7 +146,7 @@ export default function AboutSection() {
         │  RIGHT(clamp): identities / into / contact           │
         └──────────────────────────────────────────────────────┘
       */}
-      <div className="w-full min-h-screen snap-start relative bg-[#0a0a0a] text-white overflow-x-hidden border-b-[32px] border-black box-border flex flex-col">
+      <div id="section-1" className="w-full min-h-screen snap-start snap-always relative bg-[#0a0a0a] text-white overflow-x-hidden border-b-[32px] border-black box-border flex flex-col">
 
 
         {/* ── TOP BAR ───────────────────────────────── */}

@@ -61,7 +61,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
   }, []);
 
   return (
-    <section className="h-screen w-full snap-start snap-always relative z-0 overflow-hidden bg-black flex items-center justify-center">
+    <section id="section-0" className="h-screen w-full snap-start snap-always relative z-0 overflow-hidden bg-black flex items-center justify-center">
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center">
         
