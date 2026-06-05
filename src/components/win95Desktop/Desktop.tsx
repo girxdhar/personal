@@ -6,6 +6,8 @@ import wallpaper2 from '../win95Desktop/assets/wallpaper2.png';
 import wallpaper3 from '../win95Desktop/assets/wallpaper3.png';
 import wallpaper4 from '../win95Desktop/assets/wallpaper4.png';
 import wallpaper5 from '../win95Desktop/assets/wallpaper5.png';
+import wallpaper6 from '../win95Desktop/assets/wallpaper6.png';
+
 
 interface DesktopProps {
   wallpaper: string;
@@ -19,6 +21,7 @@ const wallpaperImages: Record<string, string> = {
   setup: wallpaper3,
   redblocks: wallpaper4,
   greencircuit: wallpaper5,
+  wallpaper6: wallpaper6,
 };
 
 
@@ -35,6 +38,7 @@ export const Desktop: React.FC<DesktopProps> = ({ wallpaper, children, onContext
         className="absolute inset-0 w-full h-full object-cover"
         style={{ imageRendering: 'auto' }}
       />
+      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
       {children}
     </div>
   );

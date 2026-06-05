@@ -59,7 +59,7 @@ type RecycleBinItem = {
 };
 
 // ==================== CONSTANTS ====================
-const WALLPAPERS = ["teal", "clouds", "setup", "redblocks", "greencircuit"];
+const WALLPAPERS = ["teal", "clouds", "setup", "redblocks", "greencircuit", "wallpaper6"];
 
 // Adjusted icon positions to start lower (avoiding header overlap)
 const DEFAULT_ICON_POSITIONS: Record<string, { x: number; y: number }> = {

@@ -10,8 +10,9 @@ const PoetryDesktopSection = lazy(() => import('./components/win95Desktop/Poetry
 export default function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [shouldLoadPoetry, setShouldLoadPoetry] = useState(false);
+  const [galleryTab, setGalleryTab] = useState('photos');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const totalSections = 5;
+  const totalSections = 4;
 
   const scrollToSection = (index: number) => {
     if (index < 0 || index >= totalSections) return;
@@ -23,7 +24,7 @@ export default function App() {
       const targetElement = snapElements[index];
       
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   };
@@ -60,7 +61,9 @@ export default function App() {
     >
       <Navigation 
         currentSection={currentSection} 
+        currentGalleryTab={galleryTab}
         onNavigate={scrollToSection}
+        onSetGalleryTab={setGalleryTab}
         totalSections={totalSections}
       />
       
@@ -69,7 +72,7 @@ export default function App() {
       
       <AboutSection />
       
-      <PhotographySection />
+      <PhotographySection activeTab={galleryTab} onTabChange={setGalleryTab} />
       
       {/* Poetry Desktop Section */}
       <div className="w-full h-screen snap-start flex items-center justify-center bg-[#0a0a0a] relative z-10 border-t border-white/10">

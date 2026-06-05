@@ -389,8 +389,10 @@ function PoetryTab() {
 }
 
 
-export default function CreativeGallery() {
-  const [tab, setTab] = useState("photos");
+export default function CreativeGallery({ activeTab, onTabChange }: { activeTab?: string, onTabChange?: (tab: string) => void }) {
+  const [internalTab, setInternalTab] = useState("photos");
+  const tab = activeTab !== undefined ? activeTab : internalTab;
+  const setTab = onTabChange || setInternalTab;
 
 
   return (
@@ -407,7 +409,7 @@ export default function CreativeGallery() {
       ].join("")}</style>
 
 
-      <div className="w-full min-h-screen snap-start snap-always relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[24px] border-black box-border">
+      <div className="w-full min-h-screen snap-start relative z-10 bg-[#0a0a0a] text-white overflow-x-hidden border-b-[24px] border-black box-border">
         <div className="sticky top-0 z-50 bg-[#0a0a0a] pt-4 lg:pt-6">
           <div className="border-b border-white/10 px-5 lg:px-8 py-4 lg:py-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <div>
