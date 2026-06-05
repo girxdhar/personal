@@ -140,14 +140,14 @@
       <>
         {/* Backdrop to close menu */}
         <div
-          className="fixed inset-0"
+          className="absolute inset-0"
           style={{ zIndex: 9997 }}
           onClick={onClose}
         />
         
         {/* Start Menu */}
         <div
-          className="context-menu fixed"
+          className="context-menu absolute"
           style={{
             bottom: '28px',
             left: '0px',

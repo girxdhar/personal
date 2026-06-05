@@ -42,64 +42,66 @@ export default function Navigation({ currentSection, currentGalleryTab, onNaviga
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 px-5 lg:px-8 py-5 flex justify-between items-center">
-        {/* Logo */}
-        <motion.div
-          className="text-white text-2xl font-['Anton'] lowercase origin-left cursor-pointer"
-          style={{ transform: 'scaleX(1.15)' }}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-          onClick={() => handleNavClick(navItems[0])}
-        >
-          {/* giridhar. */}
-        </motion.div>
+      {/* Logo */}
+      <motion.div
+        className="fixed z-50 text-white text-2xl font-['Anton'] lowercase origin-left cursor-pointer"
+        style={{ left: '20px', top: '20px', transform: 'scaleX(1.15)' }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5 }}
+        onClick={() => handleNavClick(navItems[0])}
+      >
+        {/* giridhar. */}
+      </motion.div>
 
-        {/* Desktop nav */}
-        <div className="hidden lg:flex gap-2 xl:gap-4 items-center bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 p-1.5">
-          {navItems.map((item, index) => {
-            const active = isActive(item);
-            return (
-              <button 
-                key={item.label} 
-                onClick={() => handleNavClick(item)} 
-                className={`font-['Space_Mono'] text-[9px] xl:text-[10px] tracking-[0.18em] transition-all duration-200 uppercase px-3 py-2 border ${
-                  item.type === 'external' ? 'border-white/40 text-white hover:bg-white hover:text-black ml-2' :
-                  active ? 'border-white/30 text-white bg-white/[0.05]' : 'border-transparent text-white/40 hover:text-white/80 hover:border-white/15 hover:bg-white/[0.02]'
-                }`}
-              >
-                {item.label}
-              </button>
-            );
-          })}
-        </div>
+      {/* Desktop nav */}
+      <div 
+        className="fixed z-50 hidden lg:flex gap-2 xl:gap-4 items-center bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 p-1.5"
+        style={{ left: '50%', transform: 'translateX(-50%)', top: '20px' }}
+      >
+        {navItems.map((item, index) => {
+          const active = isActive(item);
+          return (
+            <button 
+              key={item.label} 
+              onClick={() => handleNavClick(item)} 
+              className={`font-['Space_Mono'] text-[9px] xl:text-[10px] tracking-[0.18em] transition-all duration-200 uppercase px-3 py-2 border ${
+                item.type === 'external' ? 'border-white/40 text-white hover:bg-white hover:text-black ml-2' :
+                active ? 'border-white/30 text-white bg-white/[0.05]' : 'border-transparent text-white/40 hover:text-white/80 hover:border-white/15 hover:bg-white/[0.02]'
+              }`}
+            >
+              {item.label}
+            </button>
+          );
+        })}
+      </div>
 
-        {/* Mobile hamburger */}
-        <motion.button
-          className="lg:hidden flex flex-col gap-[5px] p-2 z-50 bg-black/50 backdrop-blur-sm border border-white/10"
-          onClick={() => setMenuOpen((v) => !v)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          aria-label="Toggle menu"
-        >
-          <motion.span
-            className="block w-5 h-[1.5px] bg-white origin-center"
-            animate={menuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="block w-5 h-[1.5px] bg-white"
-            animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          />
-          <motion.span
-            className="block w-5 h-[1.5px] bg-white origin-center"
-            animate={menuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        </motion.button>
-      </nav>
+      {/* Mobile hamburger */}
+      <motion.button
+        className="fixed z-50 lg:hidden flex flex-col gap-[5px] p-2 bg-black/50 backdrop-blur-sm border border-white/10"
+        style={{ right: '20px', top: '20px' }}
+        onClick={() => setMenuOpen((v) => !v)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        aria-label="Toggle menu"
+      >
+        <motion.span
+          className="block w-5 h-[1.5px] bg-white origin-center"
+          animate={menuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
+          transition={{ duration: 0.3 }}
+        />
+        <motion.span
+          className="block w-5 h-[1.5px] bg-white"
+          animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        />
+        <motion.span
+          className="block w-5 h-[1.5px] bg-white origin-center"
+          animate={menuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.button>
 
       {/* Mobile fullscreen menu */}
       <AnimatePresence>

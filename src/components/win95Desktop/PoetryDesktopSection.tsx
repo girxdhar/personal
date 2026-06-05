@@ -80,6 +80,8 @@ interface PoetryDesktopSectionProps {
 export default function PoetryDesktopSection({ isActive = true }: PoetryDesktopSectionProps) {
   // ========== STATE ==========
   const [booting, setBooting] = useState(true);
+  const [shuttingDown, setShuttingDown] = useState(false);
+  const [shutdownStep, setShutdownStep] = useState(0);
   const [wallpaper, setWallpaper] = useState(
     WALLPAPERS[Math.floor(Math.random() * WALLPAPERS.length)]
   );
@@ -747,8 +749,14 @@ Enjoy your nostalgic experience!`}
         }
         break;
       case "shutdown":
-        sounds.shutdown();
-        setTimeout(() => window.location.reload(), 500);
+        setShuttingDown(true);
+        setShutdownStep(1);
+        setTimeout(() => {
+          setShutdownStep(2);
+          setTimeout(() => {
+            window.location.href = "https://girxdhar.github.io/pro";
+          }, 3000);
+        }, 2000);
         break;
       default:
         break;
@@ -783,6 +791,25 @@ Enjoy your nostalgic experience!`}
   }, []);
 
   // ========== RENDER ==========
+  if (shuttingDown) {
+    if (shutdownStep === 1) {
+      return (
+        <div className="w-full h-screen bg-black flex flex-col items-center justify-center cursor-none">
+          <div className="text-white font-['Space_Mono'] text-lg md:text-xl tracking-widest text-center px-4">
+            Please wait while your computer shuts down...
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="w-full h-screen bg-black flex flex-col items-center justify-center cursor-none">
+        <div className="text-[#f97316] font-['Space_Mono'] text-xl md:text-3xl font-bold tracking-wider text-center px-4">
+          It is now safe to turn off your computer.
+        </div>
+      </div>
+    );
+  }
+
   if (booting) {
     return (
       <div className="w-full h-screen">

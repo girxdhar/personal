@@ -45,7 +45,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 h-7 flex items-center px-0.5 gap-0.5"
+      className="absolute bottom-0 left-0 right-0 h-7 flex items-center px-0.5 gap-0.5"
       style={{
         background: '#c0c0c0',
         borderTop: '2px solid #ffffff',

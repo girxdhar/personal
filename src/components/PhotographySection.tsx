@@ -222,7 +222,7 @@ function PhotosTab() {
           {visible.map((photo, idx) => (
             <div
               key={photo.id}
-              className="break-inside-avoid mb-3 lg:mb-4 group cursor-pointer relative overflow-hidden cg-fi"
+              className="snap-start break-inside-avoid mb-3 lg:mb-4 group cursor-pointer relative overflow-hidden cg-fi"
               style={{ animationDelay: idx * 0.05 + "s" }}
               onClick={() => setActive(photo)}
             >
@@ -276,7 +276,7 @@ function PoemCard({ poem, idx }) {
 
   return (
     <article
-      className="relative border-b border-white/[0.08] last:border-b-0 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02]"
+      className="snap-start relative border-b border-white/[0.08] last:border-b-0 group cursor-pointer transition-colors duration-200 hover:bg-white/[0.02]"
       onClick={() => setOpen((v) => !v)}
     >
       <div className="flex items-start gap-5 lg:gap-8 px-5 lg:px-8 py-6 lg:py-8">
