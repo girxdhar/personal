@@ -17,19 +17,19 @@ const DrawText = ({ text, delay = 0, charDelay = 0.1, color = 'white' }: { text:
           WebkitTextStroke: `2px ${color}`,
           WebkitTextFillColor: 'transparent',
         }}
-        initial={{ 
+        initial={{
           opacity: 0,
           scale: 0.8,
           WebkitTextStrokeWidth: '2px',
           WebkitTextFillColor: 'transparent',
         }}
-        animate={{ 
+        animate={{
           opacity: [0, 1, 1, 1],
           scale: [0.8, 1.05, 1],
           WebkitTextStrokeWidth: ['2px', '2px', '0px'],
           WebkitTextFillColor: ['transparent', 'transparent', color],
         }}
-        transition={{ 
+        transition={{
           delay: delay + i * charDelay,
           duration: 1.2,
           times: [0, 0.3, 0.7, 1],
@@ -64,7 +64,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
     <section id="section-0" className="h-screen w-full snap-start snap-always relative z-0 overflow-hidden bg-black flex items-center justify-center">
       {/* Content container */}
       <div className="relative z-10 flex flex-col items-center">
-        
+
         {/* Motion graphic title - line drawing reveal */}
         <motion.div
           className="mb-2"
@@ -72,7 +72,7 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <h1 
+          <h1
             className="text-center text-white text-[6.5vw] sm:text-[5.5vw] lg:text-[4.8vw] xl:text-[4.2vw] leading-none tracking-tighter font-serif font-bold whitespace-nowrap flex justify-center items-center gap-1 sm:gap-2"
           >
             <span className="inline-flex items-center">
@@ -109,17 +109,17 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
               ease: "easeOut"
             }}
           />
-          
+
           <div className="relative">
             <img
               src={heroImage}
               alt="Workspace"
               className="max-w-[700px] w-full h-auto"
             />
-            
+
             {/* Typing text on monitor */}
             <div className="absolute top-[32%] right-[29%] w-[38%] h-[25%] flex items-start justify-start p-4">
-              <motion.div 
+              <motion.div
                 className="text-green-400 text-xs font-mono font-bold"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.4 }}
@@ -149,10 +149,57 @@ export default function HeroSection({ scrollToNext }: HeroSectionProps) {
             className="text-white tracking-wide whitespace-nowrap text-[3.5vw] sm:text-xl md:text-3xl px-4"
             style={{ fontFamily: 'Didot, Georgia, serif' }}
           >
-            Where aesthetic precision meets technical rigor
+            Nothing personal. Just unfinished business.
           </p>
         </motion.div>
       </div>
+
+      {/* Scroll Down Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 cursor-pointer flex flex-col items-center gap-2"
+        onClick={scrollToNext}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 3.2, duration: 1 }}
+      >
+        <span className="text-[9px] sm:text-[10px] tracking-[0.25em] font-mono text-white/40 uppercase select-none hover:text-white/80 transition-colors duration-300">
+          Scroll Down
+        </span>
+
+        {/* Mouse/scroll indicator */}
+        <div className="w-[20px] h-[34px] rounded-full border border-white/30 flex justify-center p-1 hover:border-white/60 transition-colors duration-300">
+          <motion.div
+            className="w-1 h-1.5 bg-white/70 rounded-full"
+            animate={{
+              y: [0, 10, 0],
+              opacity: [1, 0.2, 1]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+
+        {/* Blinking double chevron indicator */}
+        <motion.div
+          className="text-white/30 hover:text-white/70 transition-colors duration-300 flex flex-col items-center -mt-0.5"
+          animate={{
+            opacity: [0.3, 1, 0.3],
+            y: [0, 3, 0]
+          }}
+          transition={{
+            duration: 1.8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -4,20 +4,34 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
+import photo01 from "@/assets/Photography/photo01.png";
+import photo5 from "@/assets/Photography/photo5.png";
+import photo8 from "@/assets/Photography/photo8.jpg";
+import photo12 from "@/assets/Photography/photo12.webp";
+import photo0 from "@/assets/Photography/photo0.jpg";
+import photo1 from "@/assets/Photography/photo1.jpeg";
+import photo2 from "@/assets/Photography/photo2.jpeg";
+import photo3 from "@/assets/Photography/photo3.jpeg";
+import photo4 from "@/assets/Photography/photo4.png";
+import photo7 from "@/assets/Photography/photo7.webp";
+import photo9 from "@/assets/Photography/photo9.jpg";
+import photo10 from "@/assets/Photography/photo10.jpg";
+import photo11 from "@/assets/Photography/photo11.webp";
 
 const PHOTOS = [
-  { id:"p1",  src:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=85", title:"Somewhere Between",   location:"Coorg, Karnataka",    year:"2024", desc:"Fog settling over the valley like a held breath. I stood here for forty minutes without moving.", aspect:"tall" },
-  { id:"p2",  src:"https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=900&q=85", title:"Concrete Hours",      location:"Bengaluru",           year:"2023", desc:"The city at 6am belongs to no one. Or everyone. I never figured out which.", aspect:"wide" },
-  { id:"p3",  src:"https://images.unsplash.com/photo-1444927714506-8492d94b4e3d?w=900&q=85", title:"Salt & Light",        location:"Goa",                 year:"2024", desc:"Golden hour on the shore. A moment so obvious in its beauty it almost felt cheap to photograph.", aspect:"square" },
-  { id:"p4",  src:"https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=85", title:"Altitude",            location:"Himachal Pradesh",    year:"2023", desc:"Above the treeline, the silence has texture. You can feel it pressing in.", aspect:"wide" },
-  { id:"p5",  src:"https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=900&q=85", title:"Still Water",         location:"Kerala Backwaters",   year:"2022", desc:"The surface so still it made everything above it look uncertain.", aspect:"tall" },
-  { id:"p6",  src:"https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=900&q=85", title:"Neon Rain",           location:"Bengaluru",           year:"2024", desc:"Monsoon turns every puddle into a different city. One I'd rather live in.", aspect:"square" },
-  { id:"p7",  src:"https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=85", title:"Open Road",           location:"Rajasthan",           year:"2023", desc:"The highway at dusk. Nothing behind, everything ahead, neither of which matters.", aspect:"wide" },
-  { id:"p8",  src:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&q=85", title:"Forest Floor",        location:"Wayanad, Kerala",     year:"2022", desc:"The light arrives late here. By the time it does, it has forgotten what it was looking for.", aspect:"square" },
-  { id:"p9",  src:"https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=900&q=85", title:"Borrowed Light",      location:"Mysuru",              year:"2024", desc:"The camera was wrong about the time. I've kept its version of events.", aspect:"tall" },
-  { id:"p10", src:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900&q=85", title:"Mirror Lake",         location:"Uttarakhand",         year:"2023", desc:"Two skies. One of them had clouds. The other had ambition.", aspect:"square" },
-  { id:"p11", src:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=85", title:"The Weight of a Look",location:"Bengaluru",           year:"2024", desc:"She looked at the camera like it owed her something. I think it did.", aspect:"portrait" },
-  { id:"p12", src:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=85", title:"Against the Light",   location:"Hampi, Karnataka",    year:"2023", desc:"The sun behind him made everything else a silhouette. I kept the frame anyway.", aspect:"portrait" },
+  { id: "p01", src: photo01, title: "Somewhere Between", location: "Coorg, Karnataka", year: "2024", desc: "Fog settling over the valley like a held breath. I stood here for forty minutes without moving.", aspect: "wide" },
+  { id: "p5",  src: photo5,  title: "Still Water", location: "Kerala Backwaters", year: "2022", desc: "The surface so still it made everything above it look uncertain.", aspect: "wide" },
+  { id: "p8",  src: photo8,  title: "Forest Floor", location: "Wayanad, Kerala", year: "2022", desc: "The light arrives late here. By the time it does, it has forgotten what it was looking for.", aspect: "wide" },
+  { id: "p12", src: photo12, title: "Against the Light", location: "Hampi, Karnataka", year: "2023", desc: "The sun behind him made everything else a silhouette. I kept the frame anyway.", aspect: "tall" },
+  { id: "p0",  src: photo0,  title: "Quiet Corner", location: "Hampi, Karnataka", year: "2023", desc: "A quiet corner untouched by time. Some places feel older than they are.", aspect: "wide" },
+  { id: "p7",  src: photo7,  title: "Open Road", location: "Rajasthan", year: "2023", desc: "The highway at dusk. Nothing behind, everything ahead, neither of which matters.", aspect: "tall" },
+  { id: "p1",  src: photo1,  title: "Concrete Hours", location: "Bengaluru", year: "2023", desc: "The city at 6am belongs to no one. Or everyone. I never figured out which.", aspect: "wide" },
+  { id: "p2",  src: photo2,  title: "Salt & Light", location: "Goa", year: "2024", desc: "Golden hour on the shore. A moment so obvious in its beauty it almost felt cheap to photograph.", aspect: "wide" },
+  { id: "p3",  src: photo3,  title: "Altitude", location: "Himachal Pradesh", year: "2023", desc: "Above the treeline, the silence has texture. You can feel it pressing in.", aspect: "wide" },
+  { id: "p4",  src: photo4,  title: "Neon Rain", location: "Bengaluru", year: "2024", desc: "Monsoon turns every puddle into a different city. One I'd rather live in.", aspect: "wide" },
+  { id: "p9",  src: photo9,  title: "Borrowed Light", location: "Mysuru", year: "2024", desc: "The camera was wrong about the time. I've kept its version of events.", aspect: "wide" },
+  { id: "p10", src: photo10, title: "Mirror Lake", location: "Uttarakhand", year: "2023", desc: "Two skies. One of them had clouds. The other had ambition.", aspect: "wide" },
+  { id: "p11", src: photo11, title: "The Weight of a Look", location: "Bengaluru", year: "2024", desc: "She looked at the camera like it owed her something. I think it did.", aspect: "tall" }
 ];
 
 

@@ -82,31 +82,83 @@ export default function App() {
       {/* Poetry Desktop Section */}
       <div id="section-3" className="w-full h-screen snap-start snap-always relative z-10 flex flex-col items-center justify-center bg-black overflow-hidden border-b-[24px] border-[#0a0a0a]">
         {!shouldLoadPoetry ? (
-          <div className="text-center flex flex-col items-center gap-6 p-6">
-            <p className="font-mono text-white/50 text-xs tracking-widest uppercase">Windows 95 Experience</p>
-            <style>{`
-              @keyframes boot-shadow-pulse {
-                0% { box-shadow: 0 0 10px rgba(255,255,255,0.02), inset 0 0 5px rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.1); }
-                50% { box-shadow: 0 0 20px rgba(255,255,255,0.08), inset 0 0 10px rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.25); }
-                100% { box-shadow: 0 0 10px rgba(255,255,255,0.02), inset 0 0 5px rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.1); }
-              }
-              .boot-btn-animate {
-                animation: boot-shadow-pulse 4s ease-in-out infinite;
-              }
-              .boot-btn-animate:hover {
-                animation: none;
-                box-shadow: 0 0 25px rgba(255,255,255,0.15), inset 0 0 15px rgba(255,255,255,0.1);
-                border-color: rgba(255,255,255,0.4);
-              }
-            `}</style>
-            <button
-              onClick={() => setShouldLoadPoetry(true)}
-              className="boot-btn-animate relative px-10 py-4 bg-[#0a0a0a] text-white/80 hover:text-white font-['Space_Mono'] text-[11px] font-bold tracking-[0.25em] uppercase border border-white/10 transition-all duration-300 flex items-center gap-3 group"
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 group-hover:bg-emerald-400 group-hover:shadow-[0_0_10px_#34d399] transition-all duration-300"></div>
-              <span>BOOT SYSTEM</span>
-            </button>
-          </div>
+          <button
+  onClick={() => setShouldLoadPoetry(true)}
+  style={{
+    position: "relative",
+    overflow: "hidden",
+    padding: "16px 40px",
+    background: "#c0c0c0",
+    color: "#000",
+    borderTop: "2px solid #fff",
+    borderLeft: "2px solid #fff",
+    borderRight: "2px solid #808080",
+    borderBottom: "2px solid #808080",
+    fontFamily: '"MS Sans Serif", sans-serif',
+    fontSize: "12px",
+    fontWeight: "bold",
+    letterSpacing: ".25em",
+    textTransform: "uppercase",
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    cursor: "pointer"
+  }}
+>
+  {/* Moving border */}
+  <div
+    style={{
+      position: "absolute",
+      inset: 0,
+      padding: "2px",
+      background:
+        "conic-gradient(from var(--angle), transparent 0deg, transparent 320deg, #000 340deg, transparent 360deg)",
+      animation: "spin 2s linear infinite",
+      pointerEvents: "none"
+    }}
+  >
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        background: "#c0c0c0"
+      }}
+    />
+  </div>
+
+  {/* LED */}
+  <div
+    style={{
+      width: 8,
+      height: 8,
+      borderRadius: "50%",
+      background: "#00a000",
+      boxShadow: "0 0 3px #00a000",
+      zIndex: 1
+    }}
+  />
+
+  <span style={{ zIndex: 1 }}>
+    CLICK TO BOOT SYSTEM
+  </span>
+
+  <style>{`
+    @property --angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes spin {
+      from {
+        --angle: 0deg;
+      }
+      to {
+        --angle: 360deg;
+      }
+    }
+  `}</style>
+</button>
         ) : (
           <Suspense fallback={
             <div className="w-full h-full flex items-center justify-center bg-teal-800">
