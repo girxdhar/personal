@@ -142,7 +142,7 @@ export default function Navigation({ currentSection, currentGalleryTab, onNaviga
 
             {/* Counter at bottom */}
             <div className="absolute bottom-10 text-white/20 text-[10px] tracking-[0.3em] font-mono">
-              GIRIDHAR.DEV // 2025
+              GIRIDHAR.DEV // 2026
             </div>
           </motion.div>
         )}

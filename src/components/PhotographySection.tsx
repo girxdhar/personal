@@ -503,7 +503,7 @@ export default function CreativeGallery({ activeTab, onTabChange }: { activeTab?
 
 
         <div className="border-t border-white/[0.06] px-5 lg:px-8 py-4 flex items-center justify-between mt-4">
-          <span className="text-[20px] text-white/[0.07] tracking-[0.06em]" style={{ fontFamily: "Bebas Neue, sans-serif" }}>&#169;2025</span>
+          <span className="text-[20px] text-white/[0.07] tracking-[0.06em]" style={{ fontFamily: "Bebas Neue, sans-serif" }}>&#169;2026</span>
           <span className="font-mono text-[7px] tracking-[0.28em] text-white/18">GIRIDHAR.DEV</span>
         </div>
       </div>

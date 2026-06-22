@@ -154,7 +154,7 @@ export default function AboutSection() {
                         px-5 lg:px-8 py-[11px]
                         border-b border-white/10">
           <span className="font-['Space_Mono'] text-[8px] tracking-[0.3em] text-white/40">
-            PERSONAL SITE — 2025
+            PERSONAL SITE — 2026
           </span>
           <div className="flex gap-1.5">
             {[0,1,2].map(i => (
@@ -412,7 +412,7 @@ export default function AboutSection() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="font-['Bebas_Neue'] text-[20px] text-white/[0.10] tracking-[0.06em]">
-                  ©2025
+                  ©2026
                 </span>
                 <span className="font-mono text-[7px] tracking-[0.25em] text-white/28">
                   GIRIDHAR.DEV
